@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ön hazırlık · Aurora Pay Bobathon</title>
+<meta name="description" content="Atölyeden önce tamamlanacak hesap, erişim ve kurulum adımları ile kurum BT ekibi için gereksinimler.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html">Aurora Pay Bobathon</a>
+  <nav>
+    <a href="index.html">Genel bakış</a>
+    <a href="hazirlik.html" aria-current="page">Ön hazırlık</a>
+    <a href="kilavuz.html">Katılımcı kılavuzu</a>
+    <a href="geri-bildirim.html">Geri bildirim</a>
+    <a href="egitmen.html">Eğitmen notları</a>
+  </nav>
+</div></header>
+
+<main>
+<h1>Ön hazırlık</h1>
+<p class="lead">Atölye saatini kuruluma harcamamak için bu sayfadaki adımlar atölyeden <strong>en az iki iş günü önce</strong> tamamlanmalı.
+Kurumsal bilgisayarlarda kurulum izni, vekil sunucu ve erişim onayları beklenenden uzun sürer.</p>
+
+<div class="box ok">
+  <strong>Hazır olduğunuzu nasıl anlarsınız?</strong>
+  Repoda <code>./verify/run.sh m0</code> yedi kontrolün yedisinde PASS veriyor ve <code>bob run</code> API anahtarı hatası vermiyorsa hazırsınız.
+</div>
+
+<h2>Zaman çizelgesi</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Ne zaman?</th><th>Kim?</th><th>Ne yapılır?</th></tr></thead>
+  <tbody>
+    <tr><td>10 iş günü önce</td><td>Düzenleyen ekip + kurum BT</td><td>Ağ erişimi, kurulum yetkisi ve lisans gereksinimleri kurum BT ekibine iletilir (aşağıdaki "Kurum BT ekibi için" bölümü).</td></tr>
+    <tr><td>5 iş günü önce</td><td>Düzenleyen ekip</td><td>Katılımcılara bu sayfa, template repo bağlantısı ve Bob erişim davetleri gönderilir. Bobcoin bakiyeleri kontrol edilir.</td></tr>
+    <tr><td>2 iş günü önce</td><td>Katılımcı</td><td>Aşağıdaki altı adım tamamlanır, <code>./verify/run.sh m0</code> çıktısı eğitmene gönderilir.</td></tr>
+    <tr><td>1 iş günü önce</td><td>Eğitmen</td><td>FAIL bildiren katılımcılarla kısa bir uzaktan kontrol yapılır. Çözülemeyenler için yedek ortam ayrılır.</td></tr>
+    <tr><td>Atölye günü, 30 dk önce</td><td>Eğitmen + katılımcı</td><td>Kapı açık teknik kontrol: son kurulum sorunları oturum başlamadan çözülür.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Katılımcı için altı adım</h2>
+
+<h3>1 · Bob IDE</h3>
+<ul class="check">
+  <li><label><input type="checkbox"><span>Bob IDE kurulu ve kurum hesabınızla giriş yapılmış</span></label></li>
+  <li><label><input type="checkbox"><span>Sohbet kutusuna bir soru yazınca Bob yanıt veriyor</span></label></li>
+</ul>
+
+<h3>2 · Bob Shell</h3>
+<p>Bob Shell, IDE ile birlikte gelmez; ayrı kurulur. Kurulum npm ile yapılır, bu yüzden Node.js ve <code>registry.npmjs.org</code> erişimi gerekir. Güncel kurulum komutu için Bob dokümantasyonuna bakın.</p>
+<ul class="check">
+  <li><label><input type="checkbox"><span>Node.js ve npm kurulu: <code>node --version</code></span></label></li>
+  <li><label><input type="checkbox"><span>Terminalde <code>bob --version</code> bir sürüm numarası yazıyor</span></label></li>
+</ul>
+
+<h3>3 · Bob API anahtarı</h3>
+<p><code>bob run</code> komutu etkileşimsiz çalıştığı için API anahtarı ister. Anahtar yoksa Görev 2 ve Görev 7 şu hatayla durur: <code>Error: Bob API key is required. Set BOB_API_KEY environment variable.</code></p>
+<ul class="check">
+  <li><label><input type="checkbox"><span>Bob portalında <em>API keys</em> sayfasından bir anahtar oluşturuldu</span></label></li>
+  <li><label><input type="checkbox"><span>Anahtar terminalde tanımlı: <code>export BOB_API_KEY=&lt;anahtarınız&gt;</code></span></label></li>
+</ul>
+<div class="box danger"><strong>Anahtar bir sırdır</strong>Anahtarı repoya, sohbet mesajına veya ekran paylaşımına koymayın. Atölyeden sonra portaldan iptal edebilirsiniz.</div>
+
+<h3>4 · Python ve git</h3>
+<p>Python 3.10 destek süresini doldurdu. Kurum güvenlik politikaları ve Bob'un kendisi desteği bitmiş sürümleri kurmayı reddeder; güncel bir sürüm kullanın.</p>
+<ul class="check">
+  <li><label><input type="checkbox"><span><code>python3 --version</code> 3.11 veya üzerini gösteriyor (3.12+ önerilir)</span></label></li>
+  <li><label><input type="checkbox"><span><code>git --version</code> çalışıyor</span></label></li>
+</ul>
+
+<h3>5 · GitHub</h3>
+<p>Yeni kurulmuş bir Bob'da GitHub oturumu açık değildir ve oturum olmadan özel (private) repo klonlanamaz.</p>
+<ul class="check">
+  <li><label><input type="checkbox"><span>GitHub hesabınız var ve template repoya erişim davetini kabul ettiniz</span></label></li>
+  <li><label><input type="checkbox"><span>Template'ten <strong>kendi hesabınızda</strong> bir kopya oluşturdunuz (<em>Use this template → Create a new repository</em>)</span></label></li>
+  <li><label><input type="checkbox"><span>Bob IDE'de <em>Clone Git Repository → Clone from GitHub</em> ile oturum açtınız, ya da terminalde <code>gh auth login</code> / SSH anahtarı hazır</span></label></li>
+  <li><label><input type="checkbox"><span>İsteğe bağlı: GitHub CLI (<code>gh</code>) kurulu. Yoksa Görev 8'de PR ve CI sonucu eğitmene elle gösterilir</span></label></li>
+</ul>
+
+<h3>6 · Repo kurulumu ve son kontrol</h3>
+<pre><code>git clone https://github.com/&lt;kullanıcı-adınız&gt;/&lt;repo-adı&gt;.git
+cd &lt;repo-adı&gt;
+./setup.sh --scanners
+./verify/run.sh m0</code></pre>
+<p><code>python3</code> eski bir sürümü gösteriyorsa güncel Python'un yolunu verin:</p>
+<pre><code>PYTHON=/yol/python3.12 ./setup.sh --scanners</code></pre>
+<ul class="check">
+  <li><label><input type="checkbox"><span><code>./verify/run.sh m0</code>: 7/7 PASS</span></label></li>
+  <li><label><input type="checkbox"><span>Klasör Bob IDE'de açık ve "Restricted Mode" şeridi yok (varsa <em>Manage → Trust</em>)</span></label></li>
+</ul>
+
+<h2>Kurulumda sık görülen sorunlar</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Belirti</th><th>Neden</th><th>Çözüm</th></tr></thead>
+  <tbody>
+    <tr><td><code>Python 3.10+ gerekli.</code></td><td><code>python3</code> komutu eski bir sürümü gösteriyor</td><td>Güncel Python kurun, <code>PYTHON=/yol/python3.12 ./setup.sh --scanners</code></td></tr>
+    <tr><td><code>bob</code> komutu bulunamıyor</td><td>Yalnızca IDE kurulu; Bob Shell ayrı paket</td><td>Bob Shell'i kurun (adım 2)</td></tr>
+    <tr><td><code>semgrep yok</code></td><td><code>--scanners</code> seçeneği verilmemiş</td><td><code>./setup.sh --scanners</code>. Semgrep <code>.venv-tools/bin/</code> içine kurulur ve PATH'e eklenmez; bu beklenen davranıştır</td></tr>
+    <tr><td><code>Bob API key is required</code></td><td><code>BOB_API_KEY</code> tanımlı değil</td><td>Adım 3</td></tr>
+    <tr><td>Repo klonlanmıyor</td><td>GitHub oturumu yok veya davet kabul edilmemiş</td><td>Adım 5</td></tr>
+    <tr><td><code>pip</code> veya <code>npm</code> zaman aşımına uğruyor</td><td>Kurum vekil sunucusu paket depolarını engelliyor</td><td>BT ekibinden erişim isteyin ya da kurum içi paket aynasını kullanın</td></tr>
+    <tr><td>Source Control "Initialize Repository" öneriyor</td><td>Klonlamak yerine boş klasör açılmış</td><td>Klasörü kapatın, repoyu klonlayıp onu açın</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Kurum BT ekibi için</h2>
+<p>Atölye katılımcıların kendi kurumsal bilgisayarlarında ve kurum ağında yapılacaksa aşağıdaki gereksinimler önceden karşılanmalıdır.</p>
+
+<h3>Ağ erişimi (HTTPS, 443)</h3>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Adres</th><th>Ne için?</th><th>Hangi görev?</th></tr></thead>
+  <tbody>
+    <tr><td><code>bob.ibm.com</code></td><td>Bob oturumu, yönetim portalı, Bobalytics</td><td>Hepsi</td></tr>
+    <tr><td><code>github.com</code>, <code>api.github.com</code></td><td>Repo kopyalama, klonlama, push, Pull Request, CI</td><td>M0, M8</td></tr>
+    <tr><td><code>pypi.org</code>, <code>files.pythonhosted.org</code></td><td>Python bağımlılıkları ve Semgrep kurulumu</td><td>M0</td></tr>
+    <tr><td><code>registry.npmjs.org</code></td><td>Bob Shell kurulumu</td><td>M0, M2, M7</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Bob'un model ve servis uç noktaları için kurumunuza özel ek adresler gerekebilir; güncel listeyi IBM ekibinden isteyin. TLS denetimi (SSL inspection) yapan vekil sunucularda kurum kök sertifikasının git, pip ve npm tarafından tanınması gerekir.</p>
+
+<h3>Bilgisayar ve yetki</h3>
+<ul>
+  <li>Bob IDE, Node.js, Python 3.11+ ve git kurabilecek yetki ya da bu araçların önceden kurulmuş olması.</li>
+  <li>Kullanıcı klasöründe sanal ortam oluşturma ve yerel Python betiği çalıştırma izni. Uç nokta koruma yazılımları <code>.venv</code> altındaki çalıştırılabilir dosyaları engelleyebilir.</li>
+  <li>Bash veya zsh içeren bir terminal. Repo betikleri (<code>setup.sh</code>, <code>verify/run.sh</code>, <code>scripts/scan.sh</code>) bash betikleridir; Windows'ta WSL kullanılması önerilir.</li>
+  <li>GitHub'da kişisel hesapla repo oluşturma kurum politikasına aykırıysa, atölye için ayrılmış bir GitHub organizasyonu kullanılmalıdır.</li>
+</ul>
+
+<h3>Lisans ve bakiye</h3>
+<ul>
+  <li>Her katılımcı için Bob erişimi ve yeterli Bobcoin bakiyesi. Deneme oturumunda bir kişinin günlük harcaması yaklaşık 20 Bobcoin oldu (aynı gün yapılan başka işleri de içerebilir); katılımcı başına en az 25 Bobcoin ayırmak güvenli bir başlangıçtır.</li>
+  <li>M5'teki Findings paneli DevSecOps paketi gerektirir. Paket yoksa görev <code>./scripts/scan.sh</code> ile aynı şekilde tamamlanır.</li>
+  <li>M7'deki yönetim portalı ve Bobalytics için yetki gerekir. Yetki yoksa eğitmen kendi ekranını paylaşır.</li>
+</ul>
+
+<h3>Yedek plan</h3>
+<p>Kurulum izinleri veya ağ erişimi zamanında çözülemiyorsa en güvenilir çözüm, araçları önceden kurulmuş hazır ortamlardır (sanal makine veya bulut geliştirme ortamı). Atölye günü için ayrıca misafir ağı ya da mobil bağlantı hazır tutulmalıdır.</p>
+</main>
+
+<footer>Aurora Pay Bobathon · eğitim amaçlı kurgusal senaryo.</footer>
+</body>
+</html>

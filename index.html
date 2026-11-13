@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Pay Bobathon</title>
+<meta name="description" content="IBM Bob ile uygulamalı atölye: dokuz görev, otomatik doğrulama, hazır prompt yok.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html">Aurora Pay Bobathon</a>
+  <nav>
+    <a href="index.html" aria-current="page">Genel bakış</a>
+    <a href="hazirlik.html">Ön hazırlık</a>
+    <a href="kilavuz.html">Katılımcı kılavuzu</a>
+    <a href="geri-bildirim.html">Geri bildirim</a>
+    <a href="egitmen.html">Eğitmen notları</a>
+  </nav>
+</div></header>
+
+<main>
+<div class="hero">
+  <div class="kicker">IBM Bob · uygulamalı atölye</div>
+  <h1>Aurora Pay Bobathon</h1>
+  <p>Aurora Bank'ın Instant Pay ekibine katılıyorsunuz. Dokuz kısa görev var; her biri tek bir probleme odaklanır ve Bob'un tek bir özelliğini kullandırır.
+  Hazır prompt yok: durumu okur, hedefi anlar, Bob'a kendi cümlelerinizle yön verirsiniz. Her görevin sonunda işi otomatik doğrulayıcı onaylar.</p>
+  <div class="stats">
+    <div class="stat"><b>9</b>görev</div>
+    <div class="stat"><b>≈180 dk</b>görev süresi</div>
+    <div class="stat"><b>117</b>otomatik kontrol</div>
+  </div>
+  <a class="btn" href="hazirlik.html">Önce hazırlan</a>
+  <a class="btn ghost" href="kilavuz.html">Kılavuzu aç</a>
+</div>
+
+<h2>Nereden başlamalı?</h2>
+<div class="cards">
+  <a class="card" href="hazirlik.html"><strong>1 · Ön hazırlık</strong><span>Atölyeden önce tamamlanacak hesap, erişim ve kurulum listesi. Kurum BT ekibi için ağ ve yetki gereksinimleri.</span></a>
+  <a class="card" href="kilavuz.html"><strong>2 · Katılımcı kılavuzu</strong><span>Atölye günü açık tutulacak sayfa: görevler, teslim listeleri, ipuçları ve ilerleme takibi.</span></a>
+  <a class="card" href="geri-bildirim.html"><strong>3 · Geri bildirim</strong><span>Deneme oturumundan (dry-run) çıkan gözlemler: görev görev ne yapıldı, nerede takılındı, ne değişti.</span></a>
+  <a class="card" href="egitmen.html"><strong>4 · Eğitmen notları</strong><span>Görev bazında dikkat edilecek noktalar ve eğitmen kontrol listesi.</span></a>
+</div>
+
+<h2>Görevler</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>#</th><th>Görev</th><th>Senaryo</th><th>Bob özelliği</th><th>Süre</th><th>Doğrulama</th></tr></thead>
+  <tbody>
+    <tr><td>M0</td><td><a href="kilavuz.html#m0">İlk gün</a></td><td>Repoyu kur, Bob'la tanış</td><td>Mod seçici, <code>@</code> bağlamı</td><td>20 dk</td><td><code>./verify/run.sh m0</code></td></tr>
+    <tr><td>M1</td><td><a href="kilavuz.html#m1">Boş sayfadan servis</a></td><td>PRD ve API sözleşmesinden çalışan servis</td><td>Plan / Agent, todo listesi</td><td>25 dk</td><td><code>./verify/run.sh m1</code></td></tr>
+    <tr><td>M2</td><td><a href="kilavuz.html#m2">SEV-2 alarmı</a></td><td>Üretim olayı: dört şikâyet, dört kök neden</td><td>Bob Shell / CLI</td><td>20 dk</td><td><code>./verify/run.sh m2</code></td></tr>
+    <tr><td>M3</td><td><a href="kilavuz.html#m3">Kendi QA'ni kur</a></td><td>Ekip standardını Bob'a kalıcı öğret</td><td>Custom Mode, Rules, Skills</td><td>20 dk</td><td><code>./verify/run.sh m3</code></td></tr>
+    <tr><td>M4</td><td><a href="kilavuz.html#m4">Test kalesi</a></td><td>%85 kapsam ve dört gizli hata</td><td>M3'teki mod ve skill</td><td>25 dk</td><td><code>./verify/run.sh m4</code></td></tr>
+    <tr><td>M5</td><td><a href="kilavuz.html#m5">Güvenlik avı</a></td><td>Pentest bulgularını kökten kapat</td><td>Bob Findings, Fix with Bob</td><td>20 dk</td><td><code>./verify/run.sh m5</code></td></tr>
+    <tr><td>M6</td><td><a href="kilavuz.html#m6">Tuzağa düşme</a></td><td>Şüpheli SDK ve hassas müşteri verisi</td><td>Prompt injection, <code>.bobignore</code></td><td>20 dk</td><td><code>./verify/run.sh m6</code></td></tr>
+    <tr><td>M7</td><td><a href="kilavuz.html#m7">CFO'nun sorusu</a></td><td>Harcamayı ölç, bütçe öner</td><td>Bobcoin, Bob Admin, Bobalytics</td><td>15 dk</td><td><code>./verify/run.sh m7</code></td></tr>
+    <tr><td>M8</td><td><a href="kilavuz.html#m8">Teslimat</a></td><td>Dal, commit, PR, yeşil CI</td><td>Bob ile Git iş akışı</td><td>15 dk</td><td><code>./verify/run.sh m8</code></td></tr>
+  </tbody>
+</table>
+</div>
+<p>Görevler birbirinden bağımsızdır. İki istisna: M4, M3'te yazılan modu kullanır; M8, önceki işlerin commit'lenmesini bekler.</p>
+
+<h2>Atölyenin üç kuralı</h2>
+<ul>
+  <li><strong>Hazır prompt yok.</strong> Kılavuz ne isteneceğini söyler, nasıl isteneceğini katılımcı bulur.</li>
+  <li><strong>Kanıt, cevaptan önce gelir.</strong> Bob "bitti" dediğinde değil, doğrulayıcı PASS dediğinde görev biter.</li>
+  <li><strong>Takılınca kademeli ipucu.</strong> Önce yön, sonra yer, en son eğitmen. Cevabı kimse hazır vermez.</li>
+</ul>
+
+<div class="box warn">
+  <strong>Atölye günü başlamadan önce</strong>
+  En sık zaman kaybı içerikten değil ortamdan gelir: Python sürümü, Bob Shell kurulumu, API anahtarı ve GitHub erişimi.
+  <a href="hazirlik.html">Ön hazırlık listesini</a> atölyeden en az iki iş günü önce tamamlayın.
+</div>
+</main>
+
+<footer>Aurora Pay Bobathon · eğitim amaçlı kurgusal senaryo. Aurora Bank ve Instant Pay gerçek bir kurumu veya ürünü temsil etmez.</footer>
+</body>
+</html>

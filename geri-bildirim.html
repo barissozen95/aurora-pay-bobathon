@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geri bildirim · Aurora Pay Bobathon</title>
+<meta name="description" content="Deneme oturumundan (dry-run) çıkan geri bildirim: görev görev ne yapıldı, ne gözlendi, ne değişti ve neler hâlâ açık.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html">Aurora Pay Bobathon</a>
+  <nav>
+    <a href="index.html">Genel bakış</a>
+    <a href="hazirlik.html">Ön hazırlık</a>
+    <a href="kilavuz.html">Katılımcı kılavuzu</a>
+    <a href="geri-bildirim.html" aria-current="page">Geri bildirim</a>
+    <a href="egitmen.html">Eğitmen notları</a>
+  </nav>
+</div></header>
+
+<main>
+<h1>Deneme oturumu geri bildirimi</h1>
+<p class="lead">13 Kasım 2026 tarihli deneme oturumunda (dry-run) dokuz görev, katılımcı gözüyle ve yeni kurulmuş bir Bob üzerinde uçtan uca çalıştırıldı.
+Bu sayfa o oturumdaki gözlemleri, her gözlem için yapılan değişikliği ve hâlâ açık olan konuları toplar.</p>
+
+<h2>Özet</h2>
+<ul>
+  <li><strong>İçerik çalışıyor.</strong> Dokuz görevin tamamı bitirildi ve 117 otomatik kontrolün hepsi geçti.</li>
+  <li><strong>Zaman kaybı içerikten değil ortamdan geliyor.</strong> GitHub oturumu, Python sürümü, Bob Shell kurulumu ve API anahtarı görevlerin kendisinden daha çok vakit aldı. Bunların hepsi <a href="hazirlik.html">ön hazırlık</a> listesine taşındı.</li>
+  <li><strong>Kılavuzun dili sadeleştirildi.</strong> Oyun terimleri katılımcı kitlesine uymuyordu.</li>
+  <li><strong>Üç adım belirsizdi.</strong> M0'daki "sayarak doğrula", M2'deki birleşik kod bloğu ve M5'teki "işlev bozulmadı" maddesi yeniden yazıldı.</li>
+  <li><strong>İki görevde sorun çıkmadı.</strong> M4 ve M6 olduğu gibi bırakıldı.</li>
+</ul>
+
+<h2>Bulgular ve yapılanlar</h2>
+<p>Durum sütunu: <span class="pill done">Kılavuzda</span> katılımcı kılavuzu güncellendi · <span class="pill done">Düzeltildi</span> repodaki betik veya doğrulayıcı değişti · <span class="pill open">Açık</span> henüz karar veya iş bekliyor.</p>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>#</th><th>Görev</th><th>Gözlem</th><th>Yapılan / önerilen</th><th>Durum</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Genel</td><td>"Boss kontrolü", "güç-up", "joker", "seviye" gibi oyun terimleri katılımcı kitlesine uygun değil</td><td>Sade karşılıklar kullanıldı: Doğrulama, Bob özelliği, İpucu, Görev</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>2</td><td>M0</td><td>Yeni kurulmuş Bob'da GitHub oturumu yokken repo klonlanamıyor</td><td>GitHub oturumu ön hazırlığa eklendi; klonlama adımları tek tek yazıldı</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>3</td><td>M0</td><td>Boş klasör açılınca Bob "Restricted Mode" ve "Initialize Repository" gösteriyor; katılımcı yanlış yola sapabiliyor</td><td>"Boş klasör açma, doğrudan klonla" uyarısı ve <em>Trust</em> adımı eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>4</td><td>M0</td><td><code>./setup.sh --scanners</code> "Python 3.10+ gerekli." diyerek durdu; Bob, desteği bitmiş Python 3.10'u kurmayı reddetti</td><td>Gereksinim "3.11 veya üzeri" olarak yazıldı; <code>PYTHON=</code> kullanımı eklendi; <code>setup.sh</code> hata mesajı aynı örneği gösteriyor</td><td><span class="pill done">Düzeltildi</span></td></tr>
+    <tr><td>5</td><td>M0</td><td>Bob Shell IDE ile gelmiyor; Semgrep <code>.venv-tools</code> içinde olduğu için "kurulu değil" görünüyordu</td><td>Bob Shell ön hazırlığa eklendi; M0 doğrulayıcısı <code>.venv-tools</code> içine de bakıyor</td><td><span class="pill done">Düzeltildi</span></td></tr>
+    <tr><td>6</td><td>M0</td><td>"Kodda sayarak doğrula" ifadesi zahmetli ve belirsiz</td><td>Tek komutla doğrulama: <code>grep -c</code> ve <code>wc -l</code></td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>7</td><td>M0</td><td><code>/init</code> komutu repoyu tarayıp <code>AGENTS.md</code> üretiyor; iyi bir keşif adımı</td><td>Bonus soru olarak eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>8</td><td>M0</td><td>Kurulum sorunlarıyla birlikte görev yaklaşık 20 dakika sürdü; planlanan süre 10 dakikaydı</td><td>M0 süresi 20 dakikaya çıkarıldı</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>9</td><td>M1</td><td>PRD ve API sözleşmesini <code>@</code> ile bağlam verip "önce planla, onaylarsam devam et" demek ilk denemede çalıştı</td><td>Hamle 1'e "sen onaylamadan kod yazmasın" vurgusu eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>10</td><td>M2</td><td>Kabuk komutu ile <code>bob chat</code> aynı kod bloğundaydı; komut Bob Shell istemine yapıştırıldı</td><td>Bloklar ayrıldı; "iki pencere, iki iş" açıklaması eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>11</td><td>M2, M7</td><td><code>bob run</code> "Bob API key is required" hatasıyla durdu</td><td>API anahtarı ön hazırlığa, ilgili görevlere ve sorun giderme tablosuna eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>12</td><td>M2</td><td>Sanal ortam etkin değilken <code>python</code> komutu bulunamıyor</td><td>Komutlar <code>.venv/bin/python</code> ile yazıldı</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>13</td><td>M3</td><td><code>/create-mode</code> komutu mod iskeletini hızlı üretiyor; mod üretim kodunu düzenlemeyi reddetti</td><td>Hamle 1'e ipucu olarak eklendi; <code>fileRegex</code> satırını elle kontrol etme uyarısıyla</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>14</td><td>M5</td><td>"İşlev bozulmadı" teslim maddesinin nasıl kontrol edileceği açık değildi</td><td>Beklenen üç çıktısıyla birlikte çalıştırılabilir bir kontrol eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>15</td><td>M7</td><td>Bobalytics verisi 60 dakikada bir yenileniyor ve saatler UTC; katılımcı az önceki işini göremiyor</td><td>Uyarı eklendi; anlık rakam için <code>reports/bob-run.json</code> içindeki <code>stats</code> gösterildi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>16</td><td>M8</td><td>Commit'ler en sonda toplu atıldı; ara dal adı <code>feature/</code> kalıbına uymuyordu</td><td>M0 sonunda dal açma ve her görevden sonra commit önerisi eklendi</td><td><span class="pill done">Kılavuzda</span></td></tr>
+    <tr><td>17</td><td>Genel</td><td>Katılımcı başına Bobcoin tüketimi yalnızca tek bir oturumdan biliniyor</td><td>Atölye öncesi bakiyeler kontrol edilmeli; ilk atölyede gerçek tüketim kaydedilmeli</td><td><span class="pill open">Açık</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Görev görev geri bildirim</h2>
+
+<h3>M0 · İlk gün</h3>
+<p><strong>Repoyu klonlama</strong></p>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>Bob IDE açıldı ve açılış ekranındaki "Clone Git Repository..." seçeneği kullanıldı.</dd>
+  <dt>Gözlem</dt><dd>Yeni kurulmuş bir Bob'da GitHub hesabı bağlı değildir; hesap bağlanmadan özel repo çekilemez. İlk denemede önce boş bir klasör açıldı: Bob klasörü "Restricted Mode"da açtı ve Source Control paneli klasörün git deposu olmadığını söyleyip "Initialize Repository" önerdi.</dd>
+  <dt>Öneri</dt><dd>Kılavuz katılımcıyı doğrudan klonlamaya yönlendirmeli ve klasöre güvenme (Trust) adımını göstermeli. GitHub oturumu atölyeden önce açılmalı.</dd>
+</dl>
+<p><strong>Kurulum</strong></p>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd><code>./setup.sh --scanners</code> çalıştırıldı.</dd>
+  <dt>Gözlem</dt><dd>Betik "Python 3.10+ gerekli." diyerek durdu, çünkü <code>python3</code> eski bir sürümü gösteriyordu. Bob'dan Python 3.10 kurması istendiğinde, sürümün desteği bittiği için reddetti ve güncel sürümü kurdu. Ardından <code>bob</code> komutunun olmadığı (Bob Shell ayrı bir paket) ve Semgrep'in PATH'te bulunmadığı görüldü.</dd>
+  <dt>Öneri</dt><dd>Ön hazırlıkta Python 3.11 veya üzeri, Bob Shell ve <code>bob --version</code> kontrolü yer almalı. Katılımcılar <code>./verify/run.sh m0</code> çıktısını atölyeden önce göndermeli.</dd>
+</dl>
+<pre><code>PYTHON=/opt/homebrew/bin/python3.14 ./setup.sh --scanners</code></pre>
+<p><strong>Repoyu tanıma</strong></p>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>Aynı soru iki modda soruldu: Agent modunda ve Ask modunda "bu repo hakkında bilgi ver". Ayrıca <code>/init</code> komutu denendi.</dd>
+  <dt>Gözlem</dt><dd>İpucundaki "kodda sayarak doğrula" ifadesi zahmetli. Bob'un verdiği sayıyı elle saymak yerine tek bir komut yetti. <code>/init</code> repoyu tarayıp bir <code>AGENTS.md</code> üretti; repoyu tanımak için iyi bir adım.</dd>
+  <dt>Öneri</dt><dd>İfade "Bob'un verdiği sayıyı komutla doğrula" olarak değiştirilmeli; <code>/init</code> bonus soru olmalı.</dd>
+</dl>
+<pre><code>grep -c '^@app\.' services/core/main.py
+wc -l services/core/*.py</code></pre>
+
+<h3>M1 · Boş sayfadan servis</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>PRD ve API sözleşmesi <code>@</code> ile bağlam olarak verildi; Bob'dan önce plan, onaydan sonra kod istendi.</dd>
+  <dt>Gözlem</dt><dd>Yaklaşım ilk denemede çalıştı. İş bir dala commit'lendi, ancak dal adı M8 doğrulayıcısının beklediği <code>feature/…</code> veya <code>fix/…</code> kalıbına uymuyordu.</dd>
+  <dt>Öneri</dt><dd>Katılımcılar M0 sonunda <code>feature/&lt;kısa-ad&gt;</code> dalını açmalı ve her görevden sonra commit'lemeli. Böylece M8 kısalır.</dd>
+</dl>
+
+<h3>M2 · SEV-2 alarmı</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>Bob Shell başlatıldı; olay kaydı verilip kök nedenler istendi, düzeltme yasaklandı. Sonra <code>bob run</code> ile düzeltme denendi.</dd>
+  <dt>Gözlem</dt><dd>Kılavuzda <code>bob chat</code> ile <code>python fixtures/incident/repro.py</code> aynı kod bloğunda alt alta durduğu için kabuk komutu Bob istemine yapıştırıldı. İstem bir sohbet kutusudur, kabuk değildir. <code>bob run</code> ise "Bob API key is required. Set BOB_API_KEY environment variable." hatasıyla durdu. Sanal ortam etkin değilken <code>python</code> komutu da bulunamadı.</dd>
+  <dt>Öneri</dt><dd>Bob Shell ve terminal komutları ayrı bloklara ve ayrı sekmelere alınmalı. API anahtarı ön hazırlığa eklenmeli. Komutlar <code>.venv/bin/python</code> ile yazılmalı.</dd>
+</dl>
+
+<h3>M3 · Kendi QA'ni kur</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd><code>/create-mode</code> komutuyla yalnızca <code>tests/</code> altını düzenleyebilen bir QA modu oluşturuldu; el kitabı referans verildi.</dd>
+  <dt>Gözlem</dt><dd>Komut iskeleti hızlı üretti ve mod üretim koduna dokunmayı reddetti. Kural ve skill dosyaları da doğrulamadan geçti.</dd>
+  <dt>Öneri</dt><dd><code>/create-mode</code> Hamle 1'de ipucu olarak anılmalı; katılımcı yine de <code>fileRegex</code> satırını kendisi kontrol etmeli.</dd>
+</dl>
+
+<h3>M4 · Test kalesi</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>QA moduyla testler yazdırıldı; bulunan dört gizli hata Agent modunda düzeltildi.</dd>
+  <dt>Gözlem</dt><dd>Sorun çıkmadı.</dd>
+  <dt>Öneri</dt><dd>Kılavuzda değişiklik gerekmiyor.</dd>
+</dl>
+
+<h3>M5 · Güvenlik avı</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>Bulgular listelendi ve düzeltildi; tarama 0 bulgu verdi.</dd>
+  <dt>Gözlem</dt><dd>Teslim listesindeki "İşlev bozulmadı: geçerli sorgu ve geçerli arşiv adı hâlâ çalışıyor" maddesi açık değil. Katılımcı bunu nasıl kontrol edeceğini bilemiyor.</dd>
+  <dt>Öneri</dt><dd>Beklenen çıktılarıyla çalıştırılabilir bir kontrol eklendi: geçerli arşiv adı <code>{'exit_code': 0}</code>, geçersiz ad <code>422</code>, enjeksiyon denemesi boş liste döndürmeli.</dd>
+</dl>
+
+<h3>M6 · Tuzağa düşme</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>Tedarikçi SDK'sı incelendi, ham müşteri verisi <code>.bobignore</code> ile kapatıldı, bakiye özeti üretildi.</dd>
+  <dt>Gözlem</dt><dd>Sorun çıkmadı.</dd>
+  <dt>Öneri</dt><dd>Kılavuzda değişiklik gerekmiyor.</dd>
+</dl>
+
+<h3>M7 · CFO'nun sorusu</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd><code>bob run --format json</code> ile iki sınırlı iş çalıştırıldı; Bobalytics'ten harcama okundu ve bütçe notu yazıldı.</dd>
+  <dt>Gözlem</dt><dd>Bobalytics sayfasında verinin 60 dakikada bir yenilendiği ve saatlerin UTC olduğu yazıyor. Katılımcı az önce çalıştırdığı işi orada göremez. <code>bob run</code> için gereken API anahtarı da aynı portaldan alınıyor.</dd>
+  <dt>Öneri</dt><dd>Kılavuza gecikme uyarısı eklendi. Anlık rakam için <code>reports/bob-run.json</code> içindeki <code>stats</code> bölümü kullanılmalı.</dd>
+</dl>
+
+<h3>M8 · Teslimat</h3>
+<dl class="fb">
+  <dt>Ne yapıldı</dt><dd>İş anlamlı commit'lere bölündü, dal push edildi, Pull Request açıldı ve CI yeşil sonuç verdi.</dd>
+  <dt>Gözlem</dt><dd>Commit'lerin çoğu en sonda, bir dakika içinde atıldı. İşi sonradan anlamlı parçalara bölmek, görev sırasında commit'lemekten daha zahmetli.</dd>
+  <dt>Öneri</dt><dd>Her görevden sonra commit önerisi kılavuzun "Nasıl çalışır?" bölümüne eklendi.</dd>
+</dl>
+
+<h2>Açık konular</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>#</th><th>Konu</th><th>Sonraki adım</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Katılımcı başına Bobcoin tüketimi yalnızca tek bir oturumdan biliniyor</td><td>Bakiyeleri atölye öncesi kontrol et; ilk atölyede gerçek tüketimi kaydet</td></tr>
+    <tr><td>2</td><td>Kurumun ağ ve kurulum politikaları henüz bilinmiyor</td><td><a href="hazirlik.html">Ön hazırlık</a> sayfasındaki listeyi kurum BT ekibine gönder; yanıtına göre yedek ortam kararı ver</td></tr>
+    <tr><td>3</td><td>Görev kartları (<code>missions/</code>) kılavuzdaki yeni adımları (API anahtarı, işlev kontrolü, ayrı terminal) içermiyor</td><td>M2, M5 ve M7 kartlarını kılavuzla hizala</td></tr>
+    <tr><td>4</td><td>Görev süreleri gerçek katılımcılarla ölçülmedi</td><td>İlk atölyede her görevin başlangıç ve bitiş saatini not et</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <strong>Yeni geri bildirim eklemek</strong>
+  Her atölyeden sonra gözlemleri aynı kalıpla yazın: ne yapıldı, ne gözlendi, ne öneriliyor. Kılavuzda veya repoda karşılığı olan maddeyi "Bulgular ve yapılanlar" tablosuna, karar bekleyeni "Açık konular" tablosuna ekleyin.
+</div>
+</main>
+
+<footer>Aurora Pay Bobathon · eğitim amaçlı kurgusal senaryo.</footer>
+</body>
+</html>

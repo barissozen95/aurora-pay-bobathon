@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eğitmen notları · Aurora Pay Bobathon</title>
+<meta name="description" content="Görev bazında dikkat edilecek noktalar ve eğitmen kontrol listesi.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html">Aurora Pay Bobathon</a>
+  <nav>
+    <a href="index.html">Genel bakış</a>
+    <a href="hazirlik.html">Ön hazırlık</a>
+    <a href="kilavuz.html">Katılımcı kılavuzu</a>
+    <a href="geri-bildirim.html">Geri bildirim</a>
+    <a href="egitmen.html" aria-current="page">Eğitmen notları</a>
+  </nav>
+</div></header>
+
+<main>
+<h1>Eğitmen notları</h1>
+<p class="lead">13 Kasım 2026 tarihli deneme oturumunda (dry-run) dokuz görev uçtan uca çalıştırıldı ve 117 kontrolün tamamı geçti.
+Bu sayfa atölyeyi yürütürken dikkat edilecek noktaları toplar. Oturumdan çıkan gözlemler ve yapılan değişiklikler <a href="geri-bildirim.html">Geri bildirim</a> sayfasındadır.</p>
+
+<h2>Görev bazında eğitmen notları</h2>
+
+<h3>M0 · İlk gün</h3>
+<ul>
+  <li>Açılışta herkesin <code>./verify/run.sh m0</code> çıktısını ekranda gösterin. FAIL olan satır sorunu doğrudan söyler.</li>
+  <li>Katılımcıların template'i değil kendi kopyalarını klonladığını kontrol edin: <code>git remote get-url origin</code>.</li>
+  <li>Görev bitmeden <code>git switch -c feature/&lt;kısa-ad&gt;</code> ile dal açtırın. M8'i belirgin biçimde kısaltır.</li>
+</ul>
+
+<h3>M1 · Boş sayfadan servis</h3>
+<ul>
+  <li>İyi çalışan yaklaşım: PRD ve API sözleşmesini <code>@</code> ile bağlam olarak verip "önce planla, ben onaylayınca yaz" demek.</li>
+  <li>Sık gözden kaçan dört nokta kılavuzdaki İpucu 2'de yazılıdır: hata zarfı, reddedilen işlemin 200 dönmesi, para biçimi, dahil sınırlar.</li>
+  <li>Süre daralırsa bu görevi siz gösterebilirsiniz. Gösterimde planı PRD bölüm 4'e karşı işaretlemeyi mutlaka yapın.</li>
+</ul>
+
+<h3>M2 · SEV-2 alarmı</h3>
+<ul>
+  <li>Göreve başlamadan herkesin API anahtarının tanımlı olduğunu doğrulayın. Tek satırlık bir <code>bob run</code> denemesi yeterlidir.</li>
+  <li>Bob Shell istemi bir sohbet kutusudur. Kabuk komutunu oraya yapıştıran katılımcıyı ikinci terminal sekmesine yönlendirin.</li>
+  <li><code>bob run</code> araçları önceden onaylı çalıştırır. <code>--max-turns</code> ve <code>--max-cost</code> olmadan çalıştırılmamasını açılışta söyleyin.</li>
+</ul>
+
+<h3>M3 ve M4 · Özel mod ve testler</h3>
+<ul>
+  <li>Geçersiz yetki grubu adı veya hatalı klasör adı hata vermez, sessizce yok sayılır. Mod listede görünmüyorsa önce YAML'a bakın.</li>
+  <li>Gerçek sınav doğrulayıcı değil, moddan <code>services/core/main.py</code> dosyasını düzenlemesini istemektir. Reddetmelidir.</li>
+  <li>M4'te mod üretim koduna yazamaz. Katılımcı hatayı raporlatıp Agent moduna geçmelidir; test beklentisini düşürmek yanlış yoldur.</li>
+</ul>
+
+<h3>M5 · Güvenlik avı</h3>
+<ul>
+  <li>Findings paneli lisansa bağlıdır. Paneli olmayanlar <code>./scripts/scan.sh --verbose</code> ile aynı görevi yapar.</li>
+  <li>Düzeltilmemiş kodda doğrulayıcı repoda <code>PWNED.tgz</code> ve <code>archives/a</code> bırakır. Görev bitince temizliği hatırlatın; yoksa M8 takılır.</li>
+</ul>
+
+<h3>M6 · Tuzağa düşme</h3>
+<ul>
+  <li>Bu görevde amaç Bob'un yapmadığı şeydir. Katılımcıdan onay penceresindeki her komutu okumasını isteyin.</li>
+  <li>Sıra önemlidir: önce <code>.bobignore</code>, sonra özet. Ham müşteri dosyası silinmemelidir.</li>
+</ul>
+
+<h3>M7 · CFO'nun sorusu</h3>
+<ul>
+  <li>Bobalytics 60 dakikada bir yenilenir. Katılımcı az önceki işini orada göremez; anlık rakam <code>reports/bob-run.json</code> içindeki <code>stats</code> bölümündedir.</li>
+  <li>Portal yetkisi olmayanlar için kendi ekranınızı paylaşın. Paylaşmadan önce başka ekiplere ait verileri gizleyin.</li>
+</ul>
+
+<h3>M8 · Teslimat</h3>
+<ul>
+  <li>Dal adı <code>feature/</code> veya <code>fix/</code> ile başlamalı, devamı küçük harf, rakam ve tire olmalıdır.</li>
+  <li><code>gh</code> kurulu değilse PR ve CI kontrolleri SKIP görünür. Pull Request sayfasını size göstermeleri yeterlidir.</li>
+  <li>CI birkaç dakika sürebilir. Sonucu kapanışta toplu izlemek süreyi korur.</li>
+</ul>
+
+<h2>Eğitmen kontrol listesi</h2>
+<h3>Atölyeden önce</h3>
+<ul class="check">
+  <li><label><input type="checkbox"><span>Kurum BT ekibiyle ağ erişimi ve kurulum yetkisi konuşuldu (<a href="hazirlik.html">Ön hazırlık</a>)</span></label></li>
+  <li><label><input type="checkbox"><span>Her katılımcının Bob erişimi, Bobcoin bakiyesi ve template repo daveti hazır</span></label></li>
+  <li><label><input type="checkbox"><span>Katılımcılardan <code>./verify/run.sh m0</code> çıktısı toplandı; FAIL olanlarla görüşüldü</span></label></li>
+  <li><label><input type="checkbox"><span>Yedek ortam (hazır sanal makine veya bulut ortamı) ve yedek ağ bağlantısı hazır</span></label></li>
+  <li><label><input type="checkbox"><span>Sekiz ila on katılımcı için bir eğitmen veya yardımcı planlandı</span></label></li>
+  <li><label><input type="checkbox"><span>M7 için portal ve Bobalytics yetkisi olan bir hesap hazır</span></label></li>
+</ul>
+<h3>Atölye günü</h3>
+<ul class="check">
+  <li><label><input type="checkbox"><span>Oturumdan 30 dakika önce kapı açık teknik kontrol yapıldı</span></label></li>
+  <li><label><input type="checkbox"><span>Açılışta kurallar ve kesme sırası ekranda gösterildi</span></label></li>
+  <li><label><input type="checkbox"><span>M0 sonunda herkes çalışma dalını açtı</span></label></li>
+  <li><label><input type="checkbox"><span>M2 öncesi API anahtarları doğrulandı</span></label></li>
+  <li><label><input type="checkbox"><span>M5 sonrası <code>rm -f PWNED.tgz archives/a</code> hatırlatıldı</span></label></li>
+  <li><label><input type="checkbox"><span>Kapanışta <code>./verify/run.sh all</code> sonuçları ve gerçek süreler not edildi</span></label></li>
+</ul>
+</main>
+
+<footer>Aurora Pay Bobathon · eğitim amaçlı kurgusal senaryo.</footer>
+</body>
+</html>

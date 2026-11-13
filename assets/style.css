@@ -1,0 +1,90 @@
+/* Aurora Pay Bobathon web dokümantasyonu: ortak stil */
+:root{
+  --bg:#ffffff; --surface:#f7f8fa; --border:#e5e7eb; --text:#1f2328; --muted:#57606a;
+  --accent:#0f62fe; --accent-soft:#e8f0ff; --ok:#198038; --ok-soft:#e6f4ea;
+  --warn:#8a5a00; --warn-bg:#fff8e1; --danger:#a2191f; --danger-bg:#fff1f1;
+  --night:#161b2e; --night2:#232b47; --gold:#f1c21b;
+  --code-bg:#161616; --code-fg:#f4f4f4;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1220; --surface:#181c2e; --border:#2c3350; --text:#e6e9f5; --muted:#a3acc9;
+    --accent:#78a9ff; --accent-soft:#1b2a4d; --ok:#6fdc8c; --ok-soft:#12301c;
+    --warn:#f1c21b; --warn-bg:#33290a; --danger:#ff8389; --danger-bg:#3a1418;
+    --night:#0b0e1a; --night2:#1b2240; --code-bg:#0b0e1a;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.7 -apple-system,"Segoe UI",system-ui,sans-serif;color:var(--text);background:var(--bg)}
+a{color:var(--accent)}
+
+/* Üst gezinme */
+.top{background:var(--night);color:#e6e9f5}
+.top .in{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.top .brand{font-weight:700;color:var(--gold);text-decoration:none;margin-right:auto;letter-spacing:.02em}
+.top nav{display:flex;flex-wrap:wrap;gap:2px 4px}
+.top nav a{color:#e6e9f5;text-decoration:none;font-size:14.5px;padding:5px 10px;border-radius:6px}
+.top nav a:hover{background:var(--night2)}
+.top nav a[aria-current=page]{background:var(--night2);color:var(--gold)}
+
+main{max-width:1040px;margin:0 auto;padding:28px 16px 72px}
+h1{font-size:34px;line-height:1.2;margin:0 0 8px;text-wrap:balance}
+h2{font-size:24px;margin:44px 0 8px;padding-top:14px;border-top:1px solid var(--border)}
+h3{font-size:17px;margin:24px 0 8px}
+p{margin:8px 0;max-width:76ch}
+li{max-width:76ch}
+.lead{color:var(--muted);font-size:18px}
+ul,ol{padding-left:22px}
+
+.hero{background:linear-gradient(135deg,#161b2e,#2a3566);color:#fff;border-radius:12px;padding:30px 28px;margin-bottom:8px}
+.hero .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.hero h1{color:#fff}
+.hero p{color:#d6dbf0;font-size:17px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.1);border-radius:8px;padding:8px 14px;font-size:13px}
+.stat b{display:block;font-size:20px;color:var(--gold)}
+.btn{display:inline-block;background:var(--gold);color:#3b2f00;font-weight:700;text-decoration:none;padding:9px 18px;border-radius:8px;margin:14px 10px 0 0}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+
+code{font:13.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--surface);border:1px solid var(--border);padding:1px 5px;border-radius:3px}
+pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:6px;overflow:auto;margin:10px 0}
+pre code{background:none;border:0;padding:0;color:inherit;font-size:13px}
+
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0}
+.card{display:block;border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--surface);text-decoration:none;color:var(--text)}
+.card:hover{border-color:var(--accent)}
+.card strong{display:block;font-size:17px;color:var(--accent);margin-bottom:4px}
+.card span{color:var(--muted);font-size:14.5px}
+
+.box{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 6px 6px 0;margin:14px 0;max-width:86ch}
+.box.warn{border-color:#e0a100;background:var(--warn-bg)}
+.box.ok{border-color:var(--ok);background:var(--ok-soft)}
+.box.danger{border-color:var(--danger);background:var(--danger-bg)}
+.box>strong:first-child{display:block}
+
+
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{margin:7px 0}
+.check label{cursor:pointer;display:flex;gap:9px;align-items:flex-start}
+.check input{margin-top:7px;accent-color:var(--ok);flex:none}
+.check input:checked+span{color:var(--muted);text-decoration:line-through}
+
+.pill{display:inline-block;font-size:12.5px;padding:1px 9px;border-radius:12px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--border);white-space:nowrap}
+.pill.done{background:var(--ok-soft);color:var(--ok)}
+.pill.open{background:var(--warn-bg);color:var(--warn)}
+
+footer{max-width:1040px;margin:0 auto;padding:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+@media (max-width:640px){h1{font-size:27px}.hero{padding:22px 18px}}
+@media print{.top{display:none}main{padding:0}h2{break-after:avoid}table{break-inside:avoid}}
+
+/* Geri bildirim sayfası: ne yapıldı / gözlem / öneri */
+.fb{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:10px 0 18px;max-width:92ch}
+.fb dt{font-weight:700;color:var(--muted);font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding-top:3px}
+.fb dd{margin:0}
+@media (max-width:560px){.fb{grid-template-columns:1fr;gap:2px}.fb dd{margin-bottom:8px}}
